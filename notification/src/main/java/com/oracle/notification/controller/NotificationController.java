@@ -1,7 +1,6 @@
 package com.oracle.notification.controller;
 
 import com.oracle.notification.service.NotificationService;
-import com.oracle.notification.service.OutlookNotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.*;
@@ -14,8 +13,6 @@ public class NotificationController {
     @Autowired
     NotificationService notificationService;
 
-    @Autowired
-    OutlookNotificationService outlookNotificationService;
 
     @RequestMapping(value="/welcome")
     @ResponseBody
