@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: camunda-hwf-engine-app
+  labels:
+    app: camunda-hwf-engine-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: camunda-hwf-engine-app
+  template:
+    metadata:
+      labels:
+        app: camunda-hwf-engine-app
+    spec:
+      containers:
+        - name: camunda-hwf-engine-app
+          image: vivverma/camundahwfengine:1.0.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: camunda-hwf-engine-svc
+spec:
+  type: NodePort
+  ports:
+  - name: camunda-hwf-engine-port
+    port: 8080
+    # nodePort: 30181
+    targetPort: 8080
+  selector:
+    app: camunda-hwf-engine-app

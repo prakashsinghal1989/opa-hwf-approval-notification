@@ -1,4 +1,5 @@
-FROM java:8
+FROM openjdk:8
+ARG JAR_FILE=target/notification-0.0.1.jar
+COPY ${JAR_FILE} notification.jar
+ENTRYPOINT ["java","-jar","/notification.jar"]
 EXPOSE 8085
-ADD /target/notification-0.0.1-SNAPSHOT.jar notification.jar
-ENTRYPOINT ["java","-jar","notification.jar"]

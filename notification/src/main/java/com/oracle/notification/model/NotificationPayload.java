@@ -3,6 +3,7 @@ package com.oracle.notification.model;
 
 
 public class NotificationPayload {
+    private String processDefinitionName;
     private String taskUrl;
     private String invoiceTitle;
     private String invoiceDate;
@@ -87,6 +88,13 @@ public class NotificationPayload {
 
     public void setAdditionalInvoiceDetails(AdditionalInvoiceDetails additionalInvoiceDetails) {
         this.additionalInvoiceDetails = additionalInvoiceDetails;
+    }
+    public String getProcessDefinitionName() {
+        return processDefinitionName;
+    }
+
+    public void setProcessDefinitionName(String processDefinitionName) {
+        this.processDefinitionName = processDefinitionName;
     }
 }
 
