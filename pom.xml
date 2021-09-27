@@ -10,7 +10,7 @@
     <version>1.0-SNAPSHOT</version>
 
     <build>
-        <finalName>opa-hwf-approval-notification</finalName>
+        <finalName>opa-hwf-poc</finalName>
     </build>
     <modules>
         <module>notification</module>
