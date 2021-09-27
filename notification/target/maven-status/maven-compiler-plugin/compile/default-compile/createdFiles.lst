@@ -1,8 +1,0 @@
-com/oracle/notification/NotificationApplication.class
-com/oracle/notification/controller/NotificationController.class
-com/oracle/notification/service/Consumer.class
-com/oracle/notification/model/Assignee.class
-com/oracle/notification/service/NotificationService.class
-com/oracle/notification/model/AdditionalInvoiceDetails.class
-com/oracle/notification/model/InvoiceCreator.class
-com/oracle/notification/model/NotificationPayload.class
