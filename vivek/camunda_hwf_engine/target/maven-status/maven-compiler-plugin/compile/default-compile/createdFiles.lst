@@ -1,9 +1,0 @@
-com/opa/camunda/poc/model/AdditionalInvoiceDetails.class
-com/opa/camunda/poc/listeners/TaskAssignmentListener.class
-com/opa/camunda/poc/util/HwfUtil.class
-com/opa/camunda/poc/Application.class
-com/opa/camunda/poc/listeners/UserTaskAIListener.class
-com/opa/camunda/poc/model/User.class
-com/opa/camunda/poc/model/NotificationPayload.class
-com/opa/camunda/poc/service/Producer.class
-com/opa/camunda/poc/util/HwfUtil$1.class
