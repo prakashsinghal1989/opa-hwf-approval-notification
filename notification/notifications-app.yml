@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: notification-app
-          image: vivverma/notification-srvc:0.0.1
+          image: vivverma/notification-srvc:2.0.0
           imagePullPolicy: Always
           ports:
             - containerPort: 8085

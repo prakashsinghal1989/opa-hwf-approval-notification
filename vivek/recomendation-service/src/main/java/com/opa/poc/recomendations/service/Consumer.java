@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.opa.poc.recomendations.model.AdditionalInvoiceDetails;
 import com.opa.poc.recomendations.model.NotificationPayload;
+import com.opa.poc.recomendations.util.RecommendationUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,8 @@ public class Consumer {
 
     @Autowired
     private Producer producer;
+    @Autowired
+    private RecommendationUtils recommendationUtils;
 
     private ObjectMapper mapper = new ObjectMapper();
     @KafkaListener(topics = "mytopic", groupId = "mygroup1")
@@ -23,8 +26,16 @@ public class Consumer {
         try {
             notificationPayload = mapper.readValue(payload, NotificationPayload.class);
             AdditionalInvoiceDetails details = new AdditionalInvoiceDetails();
-            details.setUserMessage("Recommendations coming soon. Hold tight!!!");
+
+            String outcome = recommendationUtils.predictOutcome(notificationPayload);
+            String outcomeText = outcome.equals("APPROVE")?"Approving":"Rejecting";
+            details.setUserMessage("Auto "+outcomeText + " the task based on decision made by IntelligenceService");
+            notificationPayload.setOutcome(outcome);
             notificationPayload.setAdditionalInvoiceDetails(details);
+            //Complete the Task based on the task URI also update the Variables
+
+            recommendationUtils.updateAndCompleteTask(notificationPayload.getTaskUrl(), notificationPayload.getProcessInstanceId(), outcome);
+            System.out.println("Consumer.consumeFromTopic:: Complete task completion");
             payload = mapper.writeValueAsString(notificationPayload);
             System.out.println("Consumer.consumeFromTopic:: Sending to notification post adding recommendations");
         } catch (JsonProcessingException e) {

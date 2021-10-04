@@ -1,6 +1,7 @@
 package com.oracle.notification.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.oracle.notification.NotificationApplication;
 import com.oracle.notification.model.NotificationPayload;
@@ -17,7 +18,7 @@ public class Consumer {
     @Autowired
     private NotificationService notificationService;
 
-    private ObjectMapper mapper = new ObjectMapper();
+    private ObjectMapper mapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     @KafkaListener(topics = "notificationtopic", groupId = "mygroup2")
     public void consumeFromTopic(String payload){
         System.out.println(">>>>>>>>>>>>Consumer.consumeFromTopic::message:"+payload);

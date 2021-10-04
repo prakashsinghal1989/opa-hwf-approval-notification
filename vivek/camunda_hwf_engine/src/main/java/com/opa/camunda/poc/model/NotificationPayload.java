@@ -11,7 +11,84 @@ public class NotificationPayload {
     private String currency;
     private User assignee;
     private String invoiceDescription;
+
+    @Override
+    public String toString() {
+        return "NotificationPayload{" +
+                "processDefinitionName='" + processDefinitionName + '\'' +
+                ", taskUrl='" + taskUrl + '\'' +
+                ", invoiceTitle='" + invoiceTitle + '\'' +
+                ", invoiceDate='" + invoiceDate + '\'' +
+                ", invoiceAmount='" + invoiceAmount + '\'' +
+                ", invoiceCreator=" + invoiceCreator.getName() +
+                ", currency='" + currency + '\'' +
+                ", assignee=" + assignee.getName() +
+                ", invoiceDescription='" + invoiceDescription + '\'' +
+                ", additionalInvoiceDetails=" + additionalInvoiceDetails +
+                ", processName='" + processName + '\'' +
+                ", subType='" + subType + '\'' +
+                ", creatorLevel='" + creatorLevel + '\'' +
+                ", assigneeLevel='" + assigneeLevel + '\'' +
+                ", outcome='" + outcome + '\'' +
+                '}';
+    }
+
     private AdditionalInvoiceDetails additionalInvoiceDetails;
+    private String processName;
+    private String subType;
+    private String creatorLevel;
+    private String assigneeLevel;
+    private String outcome;
+
+    public String getProcessInstanceId() {
+        return processInstanceId;
+    }
+
+    public void setProcessInstanceId(String processInstanceId) {
+        this.processInstanceId = processInstanceId;
+    }
+
+    private String processInstanceId;
+
+    public String getProcessName() {
+        return processName;
+    }
+
+    public void setProcessName(String processName) {
+        this.processName = processName;
+    }
+
+    public String getCreatorLevel() {
+        return creatorLevel;
+    }
+
+    public void setCreatorLevel(String creatorLevel) {
+        this.creatorLevel = creatorLevel;
+    }
+
+    public String getAssigneeLevel() {
+        return assigneeLevel;
+    }
+
+    public void setAssigneeLevel(String assigneeLevel) {
+        this.assigneeLevel = assigneeLevel;
+    }
+
+    public String getOutcome() {
+        return outcome;
+    }
+
+    public void setOutcome(String outcome) {
+        this.outcome = outcome;
+    }
+
+    public String getSubType() {
+        return subType;
+    }
+
+    public void setSubType(String subType) {
+        this.subType = subType;
+    }
 
     public String getTaskUrl() {
         return taskUrl;

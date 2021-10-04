@@ -1,7 +1,9 @@
 package com.oracle.notification.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class NotificationPayload {
     private String processDefinitionName;
     private String taskUrl;
@@ -13,6 +15,53 @@ public class NotificationPayload {
     private Assignee assignee;
     private String invoiceDescription;
     private AdditionalInvoiceDetails additionalInvoiceDetails;
+
+    private String processName;
+    private String subType;
+    private String creatorLevel;
+
+    public String getProcessName() {
+        return processName;
+    }
+
+    public void setProcessName(String processName) {
+        this.processName = processName;
+    }
+
+    public String getSubType() {
+        return subType;
+    }
+
+    public void setSubType(String subType) {
+        this.subType = subType;
+    }
+
+    public String getCreatorLevel() {
+        return creatorLevel;
+    }
+
+    public void setCreatorLevel(String creatorLevel) {
+        this.creatorLevel = creatorLevel;
+    }
+
+    public String getAssigneeLevel() {
+        return assigneeLevel;
+    }
+
+    public void setAssigneeLevel(String assigneeLevel) {
+        this.assigneeLevel = assigneeLevel;
+    }
+
+    public String getOutcome() {
+        return outcome;
+    }
+
+    public void setOutcome(String outcome) {
+        this.outcome = outcome;
+    }
+
+    private String assigneeLevel;
+    private String outcome;
 
     public String getTaskUrl() {
         return taskUrl;

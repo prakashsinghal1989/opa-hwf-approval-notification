@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: recommendation-app
-          image: vivverma/recommendation-srvc:0.0.1
+          image: vivverma/recommendation-srvc:2.0.0
           imagePullPolicy: Always
           ports:
             - containerPort: 8888

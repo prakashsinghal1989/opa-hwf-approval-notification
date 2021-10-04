@@ -5,9 +5,11 @@ import com.opa.camunda.poc.model.AdditionalInvoiceDetails;
 import com.opa.camunda.poc.model.NotificationPayload;
 import com.opa.camunda.poc.model.User;
 import com.opa.camunda.poc.service.Producer;
+import com.opa.camunda.poc.util.HwfUtil;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.ExecutionListener;
 import org.camunda.bpm.engine.delegate.Expression;
+import org.camunda.bpm.engine.task.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
@@ -27,9 +29,16 @@ public class UserTaskAIListener implements ExecutionListener {
     public void notify(DelegateExecution delegateExecution) throws Exception {
 
         Map<String, Object> processVaribles = delegateExecution.getVariables();
+        Task task = delegateExecution.getProcessEngineServices().getTaskService().createTaskQuery()
+                .processInstanceId(delegateExecution.getProcessInstanceId()).executionId(delegateExecution.getId()).singleResult();
+        // just make sure that task really exists
+        String taskUrl = "www.google.com";
+        if(task != null) {
+            taskUrl = "http://localhost:8080/engine-rest/task/"+task.getId();
+        }
         //Form the Java Model using the processVariable and push the message to Kafka
         NotificationPayload payload = new NotificationPayload();
-        payload.setTaskUrl((String)processVaribles.get("taskUrl"));
+        payload.setTaskUrl(taskUrl);
         payload.setProcessDefinitionName(delegateExecution.getProcessDefinitionId());
         payload.setInvoiceAmount((String)processVaribles.get("invoiceAmount"));
         payload.setInvoiceTitle((String)processVaribles.get("invoiceTitle"));
@@ -45,10 +54,12 @@ public class UserTaskAIListener implements ExecutionListener {
         payload.setAssignee(assignee);
         payload.setInvoiceCreator(creator);
 
-//        TODO:: Below should be populated by the Analytics Service
-//        AdditionalInvoiceDetails smartSuggestions  = new AdditionalInvoiceDetails();
-//        smartSuggestions.setUserMessage("Suggestions arriving soon ...Hold Tight!!!");
-//        payload.setAdditionalInvoiceDetails(smartSuggestions);
+        //New additions for weka processing
+        payload.setCreatorLevel(HwfUtil.getUserLevel(payload.getInvoiceCreator().getName()));
+        payload.setAssigneeLevel(HwfUtil.getUserLevel(payload.getAssignee().getName()));
+        payload.setSubType((String)processVaribles.get("subType"));
+        payload.setProcessName("Expense");
+        payload.setOutcome("UNPREDICTED");
 
         ObjectMapper mapper = new ObjectMapper();
         String jsonString = null;

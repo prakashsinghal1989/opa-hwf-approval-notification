@@ -11,7 +11,7 @@
     <groupId>com.opa.poc.recomendations</groupId>
     <artifactId>recommendation-srvc</artifactId>
     <packaging>jar</packaging>
-    <version>0.0.1</version>
+    <version>2.0.0</version>
     <name>recommendation-srvc</name>
     <description>Recommendation-Service</description>
     <properties>
@@ -43,6 +43,11 @@
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
         </dependency>
+        <dependency>
+            <groupId>nz.ac.waikato.cms.weka</groupId>
+            <artifactId>weka-stable</artifactId>
+            <version>3.8.0</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -69,7 +74,7 @@
                 <configuration>
                     <repository>vivverma/recommendation-srvc</repository>
                     <tag>${project.version}</tag>
-<!--                    <useMavenSettingsForAuth>true</useMavenSettingsForAuth>-->
+                   <useMavenSettingsForAuth>true</useMavenSettingsForAuth>
                 </configuration>
             </plugin>
         </plugins>

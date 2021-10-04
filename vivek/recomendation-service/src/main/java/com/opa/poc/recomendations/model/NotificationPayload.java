@@ -13,6 +13,62 @@ public class NotificationPayload {
     private String invoiceDescription;
     private AdditionalInvoiceDetails additionalInvoiceDetails;
 
+    private String processName;
+
+    public String getProcessName() {
+        return processName;
+    }
+
+    public void setProcessName(String processName) {
+        this.processName = processName;
+    }
+
+    public String getSubType() {
+        return subType;
+    }
+
+    public void setSubType(String subType) {
+        this.subType = subType;
+    }
+
+    public String getCreatorLevel() {
+        return creatorLevel;
+    }
+
+    public void setCreatorLevel(String creatorLevel) {
+        this.creatorLevel = creatorLevel;
+    }
+
+    public String getAssigneeLevel() {
+        return assigneeLevel;
+    }
+
+    public void setAssigneeLevel(String assigneeLevel) {
+        this.assigneeLevel = assigneeLevel;
+    }
+
+    public String getOutcome() {
+        return outcome;
+    }
+
+    public void setOutcome(String outcome) {
+        this.outcome = outcome;
+    }
+
+    private String subType;
+    private String creatorLevel;
+    private String assigneeLevel;
+    private String outcome;
+    private String processInstanceId;
+
+    public String getProcessInstanceId() {
+        return processInstanceId;
+    }
+
+    public void setProcessInstanceId(String processInstanceId) {
+        this.processInstanceId = processInstanceId;
+    }
+
     public String getTaskUrl() {
         return taskUrl;
     }
