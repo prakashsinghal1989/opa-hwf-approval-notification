@@ -13,13 +13,13 @@
       .title{
         text-align: center;
       }
-      .data-box{
+      .data-box,.expected-time-data-box{
         display: block;
         margin: 16px 0;
         width:100%;
         height: 100vh;
       }
-      .create-data-set-btn{
+      .create-data-set-btn,.create-expected-time-data-set-btn{
         appearance: none;
         background: #036AD8;
         border: 1px solid #036AD8;
@@ -28,16 +28,23 @@
         padding: 16px;
         color: white;
       }
+
     </style>
   </head>
 
   <body class="data-set-generator">
-    <div>
+  <div class="row">
+    <div >
       <h1 class="title">Data Set Generator</h1>
       <button onclick="createDataSet()" class="create-data-set-btn">Create Data Set</button>
       <textarea id="data-box" class="data-box" rows="100"></textarea>
     </div>
-
+    <div >
+      <h1 class="title">Expected Time Data Set Generator</h1>
+      <button onclick="createExpectedTimeDataSet()" class="create-expected-time-data-set-btn">Expected Time Data Set</button>
+      <textarea id="expected-time-data-box" class="data-box" rows="100"></textarea>
+    </div>
+   </div>
     <script type="text/javascript" src="data-generator.js"></script>
   </body>
 
