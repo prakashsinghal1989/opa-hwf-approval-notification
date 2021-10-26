@@ -1,0 +1,95 @@
+// Font weights
+$opa-font-weight-lighter: lighter !default;
+$opa-font-weight-light: 300 !default;
+$opa-font-weight-normal: normal !default;
+$opa-font-weight-medium: 400 !default;
+$opa-font-weight-semi-bold: 600 !default;
+$opa-font-weight-bold: 700 !default;
+$opa-font-weight-bolder: bolder !default;
+
+// 1rem = 16px
+
+$opa-h1-font-size: 2.125rem; // 34px
+$opa-h2-font-size: 1.5rem; // 28px
+$opa-h3-font-size: 1rem; // 16px
+
+// Body
+$opa-body-font-size-xlarge: 1.5rem; // 24px
+$opa-body-font-size-large: 1.25rem; // 20px
+$opa-body-font-size-medium: 1rem; // 16px
+$opa-body-font-size: 0.875rem; // 14px
+$opa-body-font-size-small: 0.75rem; // 12px
+
+// Other font-Sizes:
+$opa-font-size-15: 0.9375rem; // 15px
+$opa-font-size-18: 1.125rem; // 18px
+$opa-font-size-22: 1.375rem; // 22px;
+
+html {
+	font-size: 100%;
+}
+
+body {
+	margin: 0;
+	font-weight: $opa-font-weight-normal;
+	font-size: $opa-body-font-size;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+		'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: 'Helvetica Neue Light', Helvetica, Arial, sans-serif;
+}
+
+h1,
+.h1 {
+	margin: 0;
+	font-size: $opa-h1-font-size;
+	font-weight: $opa-font-weight-semi-bold;
+}
+
+h2,
+.h2 {
+	margin: 0;
+	font-weight: $opa-font-weight-normal;
+	font-size: $opa-h2-font-size;
+}
+
+h3,
+.h3 {
+	margin: 0;
+	font-weight: $opa-font-weight-bold;
+	font-size: $opa-body-font-size;
+	@media only screen and (min-width: $opa-breakpoint-desktop) {
+		font-size: $opa-h3-font-size;
+	}
+}
+
+.body {
+	&-xlarge {
+		font-weight: $opa-font-weight-normal;
+		font-size: $opa-body-font-size-xlarge;
+		line-height: 1.875rem;
+	}
+	&-large {
+		font-weight: $opa-font-weight-normal;
+		font-size: $opa-body-font-size-large;
+		line-height: 1.625rem;
+	}
+	&-medium {
+		font-weight: $opa-font-weight-normal;
+		font-size: $opa-body-font-size-medium;
+		line-height: 1.375rem;
+	}
+	&-small {
+		font-size: $opa-body-font-size-small;
+		line-height: 1.125rem;
+	}
+}

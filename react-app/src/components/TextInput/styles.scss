@@ -1,0 +1,91 @@
+@import '../../styles/main.scss';
+.opa-text-input {
+	width: 100%;
+	margin: $opa-spacing-3;
+	@media only screen and (min-width: $opa-breakpoint-tablet) {
+		width: 360px;
+	}
+	&__container {
+		position: relative;
+		height: $opa-spacing-8;
+	}
+	&__input {
+		box-sizing: border-box;
+		width: 100%;
+		margin: 0;
+		border: 1px solid $opa-color-black;
+		color: $opa-color-graphite;
+		border-radius: 4px;
+		font-size: $opa-body-font-size-medium;
+		padding: $opa-spacing-3;
+		line-height: 1.31;
+		font-weight: $opa-font-weight-normal;
+		outline: none;
+		&[type='number'] {
+			appearance: textfield; /*For FireFox*/
+			&::-webkit-inner-spin-button,
+			&::-webkit-outer-spin-button {
+				/*For Webkits like Chrome and Safari*/
+				appearance: none;
+				margin: 0;
+			}
+		}
+		&:focus {
+			border: 2px solid $opa-color-light-blue;
+		}
+		&:focus + .opa-text-input__label,
+		&.has-value + .opa-text-input__label {
+			top: 0;
+			left: 10px;
+			padding: 0 $opa-spacing-1;
+			font-size: $opa-body-font-size;
+			background-color: $opa-color-white;
+		}
+		&--date-type {
+			&:not(:placeholder-shown) ~ .opa-text-input__label {
+				top: 0;
+				left: 10px;
+				padding: 0 $opa-spacing-1;
+				font-size: $opa-body-font-size;
+				background-color: $opa-color-white;
+			}
+		}
+		&:focus + .opa-text-input__label {
+			color: $opa-color-light-blue;
+		}
+		&.disabled {
+			color: $opa-color-grey-3;
+			border: 1px solid $opa-color-grey-4;
+			pointer-events: none;
+		}
+		&.disabled + .opa-text-input__label {
+			color: $opa-color-grey-3;
+			pointer-events: none;
+		}
+		&.error {
+			color: $opa-color-red;
+			border: 2px solid $opa-color-red;
+		}
+		&.error + .opa-text-input__label {
+			color: $opa-color-red;
+		}
+	}
+	&__label {
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		left: $opa-spacing-3;
+	}
+	&--error-text {
+		color: $opa-color-red;
+	}
+	&--date-type {
+		&:not(:placeholder-shown) ~ .opa-text-input__label {
+			top: 0;
+			left: 10px;
+			padding: 0 $opa-spacing-1;
+			font-size: $opa-body-font-size;
+			background-color: $opa-color-white;
+		}
+	}
+}

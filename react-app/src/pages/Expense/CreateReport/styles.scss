@@ -1,0 +1,18 @@
+@import '../../../styles/main.scss';
+.opa-create-report {
+	color: $opa-color-black;
+	margin: $opa-spacing-3 10%;
+	&--title {
+		font-weight: $opa-font-weight-light;
+	}
+	&__form {
+		margin: $opa-spacing-3 0;
+		&--item-btn,
+		&--action-btns {
+			margin: $opa-spacing-3;
+		}
+		&--btn {
+			margin: $opa-spacing-3 0;
+		}
+	}
+}

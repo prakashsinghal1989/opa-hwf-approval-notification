@@ -1,0 +1,30 @@
+@import '../../../styles/main.scss';
+.opa-expense-landing {
+	color: $opa-color-black;
+	&__container {
+		margin: 0 10%;
+	}
+	&--bg {
+		background-image: url('../../../assets/images/expense-background.png');
+		padding-bottom: 12px;
+	}
+	&--title {
+		font-size: $opa-body-font-size-large;
+		margin: $opa-spacing-4 0;
+	}
+	&__reports {
+		&--create-report {
+			box-shadow: 6px 8px 8px 6px rgba($opa-color-black, 0.1);
+			&:hover {
+				box-shadow: 0px 0px 0px 2px rgba($color: $opa-color-black, $alpha: 0.5);
+			}
+			.opa-grid-cell--link {
+				color: $opa-color-black;
+			}
+			.fa-plus {
+				color: $opa-color-green;
+				font-size: 32px;
+			}
+		}
+	}
+}

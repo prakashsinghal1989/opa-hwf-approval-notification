@@ -1,0 +1,26 @@
+@import '../../styles/main.scss';
+.opa-grid-cell {
+	background-color: rgba(255, 255, 255, 0.1);
+	margin: $opa-spacing-2;
+	width: 150px;
+	height: 150px;
+	border-radius: $opa-spacing-2;
+	color: $opa-color-white;
+	font-weight: $opa-font-weight-light;
+	font-size: $opa-body-font-size-medium;
+	&:hover {
+		box-shadow: 0px 0px 0px 2px rgba($color: $opa-color-white, $alpha: 0.5);
+	}
+	&--link {
+		color: $opa-color-white;
+		&:hover {
+			color: $opa-color-white;
+			text-decoration: none;
+		}
+	}
+
+	.fa-wallet {
+		color: $opa-color-white;
+		font-size: $opa-h1-font-size;
+	}
+}

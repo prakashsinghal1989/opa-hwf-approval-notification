@@ -1,0 +1,39 @@
+@import '../../styles/main.scss';
+
+.opa-button {
+	border: 1px solid $opa-color-graphite;
+	text-align: center;
+	padding: $opa-spacing-4;
+	font-size: $opa-body-font-size;
+	font-weight: $opa-font-weight-bold;
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-width: 120px;
+	background: none;
+
+	&.disabled {
+		border-color: $opa-color-graphite;
+		background-color: rgba($opa-color-graphite, 0.1);
+		color: $opa-color-graphite;
+		cursor: not-allowed;
+	}
+
+	&.large {
+		padding: $opa-spacing-3 20px;
+	}
+	&.medium {
+		padding: 10px 20px;
+	}
+	&.small {
+		padding: 6px 20px;
+		min-width: 100px;
+	}
+	&--icon-right {
+		margin-left: $opa-spacing-2;
+	}
+	&--icon-left {
+		margin-right: $opa-spacing-2;
+	}
+}

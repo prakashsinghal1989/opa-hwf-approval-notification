@@ -1,0 +1,11 @@
+@import '../../styles/main.scss';
+.opa-page-layout {
+	&__header {
+		background-color: $opa-header-background;
+		padding: $opa-spacing-3;
+		height: 90px;
+	}
+	&__content {
+		height: 100vh;
+	}
+}

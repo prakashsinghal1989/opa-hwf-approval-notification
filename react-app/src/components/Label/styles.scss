@@ -1,0 +1,20 @@
+@import '../../styles/main.scss';
+
+.opa-label-component {
+	color: $opa-color-graphite;
+	&.extra-large {
+		font-size: $opa-body-font-size-xlarge;
+	}
+	&.large {
+		font-size: $opa-body-font-size-large;
+	}
+	&.medium {
+		font-size: $opa-body-font-size-medium;
+	}
+	&.small {
+		font-size: $opa-body-font-size;
+	}
+	&.extra-small {
+		font-size: $opa-body-font-size-small;
+	}
+}

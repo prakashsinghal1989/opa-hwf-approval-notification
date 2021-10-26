@@ -1,0 +1,13 @@
+@import '../../styles/main.scss';
+
+.opa-home {
+	height: inherit;
+	color: $opa-color-white;
+	background-image: url('../../assets/images/background.png');
+	&__container {
+		margin: 0 10%;
+	}
+	&--apps-title {
+		margin: $opa-spacing-3;
+	}
+}
