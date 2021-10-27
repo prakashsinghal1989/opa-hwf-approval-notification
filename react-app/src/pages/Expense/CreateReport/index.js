@@ -43,13 +43,13 @@ const CreateReport = () => {
 			}
 			const payload = {
 				processName: 'Expense',
-				cattegory: type,
+				category: type,
 				amount,
-				priority: 1,
+				priority: Math.floor(Math.random() * (3 - 1 + 1) + 1),
 				hasAttachment,
 			};
 			const result = await NetworkUtils.makeApiRequest({
-				url: 'timePrediction.json',
+				url: 'recommendations/time',
 				method: 'post',
 				data: payload,
 			});
@@ -121,13 +121,6 @@ const CreateReport = () => {
 	};
 	const submitReport = async (values) => {
 		console.log(values);
-		//   {
-		//     “processName”:“Expense”,
-		//     “category”:“Airfare”,
-		//     “amount”:“269360",
-		//     “priority”:“1",
-		//     “hasAttachment”:“TRUE”
-		//  }
 	};
 
 	return (
