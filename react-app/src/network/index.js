@@ -7,12 +7,13 @@ import queryString from 'query-string';
 import networkConstants from '../constants/networkConstants';
 import urlConfig from '../config/urlConfig';
 
-const { baseUrl = {} } = urlConfig;
+const { baseUrl = '' } = urlConfig;
+console.log(baseUrl);
 export default class NetworkUtils {
 	static env = process.env.REACT_APP_BUILD_ENV || 'default';
 
 	static networkParams = {
-		serverBaseUrl: baseUrl[this.env],
+		serverBaseUrl: baseUrl,
 	};
 
 	static memoizedData = {};

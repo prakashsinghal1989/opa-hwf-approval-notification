@@ -2,5 +2,5 @@
  * This gets used for getting urls based on different env variables.
  */
 export default {
-	baseUrl: '',
+	baseUrl: 'http://localhost:8000',
 };

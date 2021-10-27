@@ -7,6 +7,9 @@ import clsx from 'clsx';
 import expenseReportTypeConfig from '../../../config/expenseReportTypeConfig';
 import expenseCurrencyConfig from '../../../config/expenseCurrencyConfig';
 
+// Network
+import NetworkUtils from '../../../network';
+
 // ValidationSchema
 import validationSchema from './validationSchema';
 
@@ -27,15 +30,37 @@ const CreateReport = () => {
 	const [showOtherFields, setShowOtherFields] = useState(false);
 	const [timePredictionCompleted, setTimePredictionFlag] = useState(false);
 	const [timePredictionModalStatus, setTimePredictionModalStatus] = useState(false);
+	const [timePredictionMessage, setTimePredictionMessage] = useState('');
 	const [, setLoaderVisible] = useContext(AppContext);
-	const getTimePrediction = () => {
-		setLoaderVisible(true);
 
-		setTimeout(() => {
+	const getTimePrediction = async () => {
+		try {
+			setLoaderVisible(true);
+			const result = await NetworkUtils.makeApiRequest({
+				url: 'timePrediction.json',
+			});
+
+			const { responseData } = result;
+			if (responseData) {
+				const { predictionMessage } = responseData;
+				setTimePredictionMessage(predictionMessage);
+				setTimePredictionModalStatus(true);
+			}
+		} catch (e) {
+			console.log(e);
+		} finally {
 			setLoaderVisible(false);
-			setTimePredictionModalStatus(true);
-		}, 2000);
+		}
 	};
+
+	// const getTimePrediction = () => {
+	// 	setLoaderVisible(true);
+
+	// 	setTimeout(() => {
+	// 		setLoaderVisible(false);
+	// 		setTimePredictionModalStatus(true);
+	// 	}, 2000);
+	// };
 
 	/**
 	 * Method to close the Modal
@@ -218,6 +243,7 @@ const CreateReport = () => {
 				<TimePredictionModal
 					handleModalClose={handleModalClose}
 					timePredictionModalStatus={timePredictionModalStatus}
+					timePredictionMessage={timePredictionMessage}
 				/>
 			)}
 		</div>
