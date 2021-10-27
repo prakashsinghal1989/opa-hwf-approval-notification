@@ -5,16 +5,13 @@ import axios from 'axios';
 import queryString from 'query-string';
 
 import networkConstants from '../constants/networkConstants';
-import urlConfig from '../config/urlConfig';
 
-const { baseUrl = '' } = urlConfig;
-console.log(baseUrl);
 export default class NetworkUtils {
 	static env = process.env.REACT_APP_BUILD_ENV || 'default';
 
-	static networkParams = {
-		serverBaseUrl: baseUrl,
-	};
+	// static networkParams = {
+	// 	serverBaseUrl: baseUrl,
+	// };
 
 	static memoizedData = {};
 
@@ -91,30 +88,23 @@ export default class NetworkUtils {
 	 */
 
 	static makeApiRequest(requestObject) {
-		const {
-			method,
-			url,
-			data = {},
-			params = undefined,
-			memoizeResponse = false,
-			isExternal = false,
-		} = requestObject;
+		const { method, url, data = {}, params = undefined, memoizeResponse = false } = requestObject;
 
-		const { serverBaseUrl } = this.networkParams;
+		// const { serverBaseUrl } = this.networkParams;
 		/* eslint-disable consistent-return */
 		return new Promise((resolve, reject) => {
 			try {
-				const completeUrl = isExternal ? url : `${serverBaseUrl}/${url}`;
+				//  const completeUrl = isExternal ? url : `${serverBaseUrl}/${url}`;
 
-				if (this.memoizedData[completeUrl]) {
-					return resolve(this.memoizedData[completeUrl]);
+				if (this.memoizedData[url]) {
+					return resolve(this.memoizedData[url]);
 				}
 				const headerObject = {
 					'content-type': 'application/json',
 				};
 				axios({
 					method,
-					url: completeUrl,
+					url,
 					data,
 					params,
 					headers: headerObject,
@@ -126,7 +116,7 @@ export default class NetworkUtils {
 					.then((response) => {
 						const { data: responseData, status } = response;
 						if (memoizeResponse) {
-							this.memoizedData[completeUrl] = { responseData, status };
+							this.memoizedData[url] = { responseData, status };
 						}
 						return resolve({ responseData, status });
 					})

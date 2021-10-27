@@ -1,15 +1,15 @@
 export default [
 	{
 		name: 'AirFare',
-		value: 'AirFare',
+		value: 'Airfare',
 	},
 	{
-		name: 'Internet',
-		value: 'Internet',
+		name: 'CarRental',
+		value: 'CarRental',
 	},
 	{
-		name: 'Travel',
-		value: 'Travel',
+		name: 'Food',
+		value: 'Food',
 	},
 	{
 		name: 'Mobile',
