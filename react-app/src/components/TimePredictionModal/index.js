@@ -3,6 +3,7 @@ import { bool, func, string } from 'prop-types';
 // Components
 import GenericModal from '../GenericModal';
 import Button from '../Button';
+
 // Styles
 import './styles.scss';
 
