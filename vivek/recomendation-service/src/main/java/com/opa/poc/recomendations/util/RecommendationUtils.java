@@ -6,6 +6,7 @@ import java.util.List;
 
 
 import com.opa.poc.recomendations.model.NotificationPayload;
+import com.opa.poc.recomendations.model.TimePayload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -13,6 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 import weka.classifiers.Classifier;
+import weka.classifiers.lazy.IBk;
 import weka.classifiers.trees.RandomTree;
 import weka.core.Attribute;
 import weka.core.DenseInstance;
@@ -23,16 +25,47 @@ import weka.core.converters.ConverterUtils.DataSource;
 
 public class RecommendationUtils {
 
-    private static final String modelpath = "/Users/vivvverm/IdeaProjects/PrakashGit/opa-hwf-poc/vivek/recomendation-service/src/main/resources/expense_train_levelsonly_java2.model";
-    private static final String trainingArff = "/Users/vivvverm/IdeaProjects/PrakashGit/opa-hwf-poc/vivek/recomendation-service/src/main/resources/expense_train_levelsonly.arff";
 
+    private static final String modelpath = "/Users/vivvverm/IdeaProjects/PrakashGit/opa-hwf-poc/vivek/recomendation-service/src/main/resources/expense_train_levelsonly_java2.model";
+    private static final String timeModelpath = "/Users/vivvverm/IdeaProjects/PrakashGit/opa-hwf-poc/vivek/recomendation-service/src/main/resources/sid/expected_wait_time_java2.model";
+    private static final String trainingArff = "/Users/vivvverm/IdeaProjects/PrakashGit/opa-hwf-poc/vivek/recomendation-service/src/main/resources/expense_train_levelsonly.arff";
+    private static final String timeTrainingArff = "/Users/vivvverm/IdeaProjects/PrakashGit/opa-hwf-poc/vivek/recomendation-service/src/main/resources/sid/expected_wait_time.arff";
     @Autowired
     private RestTemplate restTemplate;
 
     @Autowired
     private RecommendationUtils recommendationUtils;
 
-    public static void createModel() {
+    public static void createModel(){
+        createOutcomeModel();
+        createTimeModel();
+    }
+    public static void createTimeModel(){
+        DataSource source;
+        try {
+            source = new DataSource(timeTrainingArff);
+            Instances trainDataset = source.getDataSet();
+            trainDataset.setClassIndex(trainDataset.numAttributes() - 1);
+            int numClass = trainDataset.numClasses();
+
+            for (int i = 0; i < numClass; i++) {
+                String classValue = trainDataset.classAttribute().value(i);
+                System.out.println("classValue " + i + " is " + classValue);
+            }
+
+            IBk ibk = new IBk();
+            ibk.buildClassifier(trainDataset);
+
+            SerializationHelper.write(timeModelpath, ibk);
+            System.out.println(">>>>>>>>>>Completed::");
+
+        } catch (Exception e) {
+            System.out.println(">>>>>>>>>>>Caught Exception ::" + e.getMessage());
+            e.printStackTrace();
+        }
+
+    }
+    public static void createOutcomeModel() {
         // TODO Auto-generated constructor stub
         DataSource source;
         try {
@@ -72,7 +105,101 @@ public class RecommendationUtils {
     }
 
     public static void main(String[] args) {
-        //recommendationUtils.readfile();
+        //Expense,CarRental,11061,FALSE,2,4
+        //Expense,Airfare,269360,FALSE,1,9
+       TimePayload payload = new TimePayload();
+        payload.setProcessName("Expense");
+        payload.setCategory("Airfare");
+        payload.setAmount("269360");
+        payload.setPriority("3");
+        payload.setHasAttachment("TRUE");
+        RecommendationUtils recommendationUtils = new RecommendationUtils();
+        recommendationUtils.predictTime(payload);
+    }
+
+    public String predictTime(TimePayload payload){
+
+        final List<String> processNames = new ArrayList<String>() {
+            {
+                add("Expense");
+            }
+        };
+
+        final List<String> categories = new ArrayList<String>() {
+            {
+                add("Airfare");
+                add("Mobile");
+                add("CarRental");
+                add("Food");
+            }
+        };
+
+        final List<String> hasAttachments = new ArrayList<String>() {
+            {
+                add("TRUE");
+                add("FALSE");
+            }
+        };
+
+        final Attribute processName = new Attribute("processName", processNames);
+        final Attribute category = new Attribute("category", categories);
+        final Attribute amount = new Attribute("amount");
+        final Attribute hasAttachment = new Attribute("hasAttachment", hasAttachments);
+        final Attribute priority = new Attribute("priority");
+        final Attribute outcome = new Attribute("outcome");
+
+        ArrayList<Attribute> attributeList = new ArrayList<Attribute>() {
+            {
+                add(processName);
+                add(category);
+                add(amount);
+                add(hasAttachment);
+                add(priority);
+                add(outcome);
+            }
+        };
+
+        Instances unpredictedData = new Instances("TestInstance", attributeList, 1);
+        unpredictedData.setClassIndex(unpredictedData.numAttributes() - 1);
+        DenseInstance instanceToPredict = new DenseInstance(unpredictedData.numAttributes()) {
+            {
+                setValue(processName, payload.getProcessName());
+                setValue(category, payload.getCategory());
+                setValue(amount, Integer.valueOf(payload.getAmount()));
+                setValue(hasAttachment, payload.getHasAttachment());
+                setValue(priority, Integer.valueOf(payload.getPriority()));
+            }
+        };
+
+        instanceToPredict.setDataset(unpredictedData);
+
+        //Import training model
+        Classifier cls = null;
+        InputStream is = null;
+        try {
+            is = this.getClass().getResourceAsStream("/sid/expected_wait_time_java2.model");
+            System.out.println("RecommendationUtils.predictTimeOutcome:: trying to read model is::"+is);
+            cls = (IBk) SerializationHelper.read(is);
+            is.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (cls == null) {
+            System.out.println("RecommendationUtils.predictTimeOutcome:: CLS is NUll-- returning");
+            return null;
+        }
+
+        //Predict new sample data
+        String predString = null;
+        double result = -1;
+        try {
+            result = cls.classifyInstance(instanceToPredict);
+            System.out.println(">>>>>>Predicted Time" + result);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return String.valueOf(Math.ceil(result));
     }
 
     public  String predictOutcome(NotificationPayload payload) {

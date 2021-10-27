@@ -27,10 +27,11 @@ kind: Service
 metadata:
   name: recommendation-svc
 spec:
+  type: NodePort
   ports:
   - name: recommendation-svc
     port: 8888
     # nodePort: 30181
     targetPort: 8888
   selector:
-    app: recommendation-svc
+    app: recommendation-app
