@@ -1,5 +1,6 @@
 // Components
 import GridCell from '../../components/GridCell';
+
 // Styles
 import './styles.scss';
 

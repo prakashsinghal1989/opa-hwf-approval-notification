@@ -33,11 +33,25 @@ const CreateReport = () => {
 	const [timePredictionMessage, setTimePredictionMessage] = useState('');
 	const [, setLoaderVisible] = useContext(AppContext);
 
-	const getTimePrediction = async () => {
+	const getTimePrediction = async (values) => {
 		try {
 			setLoaderVisible(true);
+			const { type, amount, isReceiptMissing, selectedFile } = values;
+			let hasAttachment = false;
+			if (selectedFile && !isReceiptMissing) {
+				hasAttachment = true;
+			}
+			const payload = {
+				processName: 'Expense',
+				category: type,
+				amount,
+				priority: Math.floor(Math.random() * (3 - 1 + 1) + 1),
+				hasAttachment,
+			};
 			const result = await NetworkUtils.makeApiRequest({
-				url: 'timePrediction.json',
+				url: 'recommendations/time',
+				method: 'post',
+				data: payload,
 			});
 
 			const { responseData } = result;
@@ -52,15 +66,6 @@ const CreateReport = () => {
 			setLoaderVisible(false);
 		}
 	};
-
-	// const getTimePrediction = () => {
-	// 	setLoaderVisible(true);
-
-	// 	setTimeout(() => {
-	// 		setLoaderVisible(false);
-	// 		setTimePredictionModalStatus(true);
-	// 	}, 2000);
-	// };
 
 	/**
 	 * Method to close the Modal
@@ -87,7 +92,7 @@ const CreateReport = () => {
 		return null;
 	};
 
-	const getConfirmationCTA = ({ isSubmitting, isValid }) => {
+	const getConfirmationCTA = ({ isSubmitting, isValid, values }) => {
 		if (timePredictionCompleted) {
 			return (
 				<Button
@@ -105,14 +110,16 @@ const CreateReport = () => {
 				type="button"
 				disabled={!isValid}
 				additionalClasses="opa-create-report__form--btn"
-				onClick={getTimePrediction}
+				onClick={() => {
+					getTimePrediction(values);
+				}}
 				key="next-btn"
 			>
 				Next
 			</Button>
 		);
 	};
-	const submitReport = (values) => {
+	const submitReport = async (values) => {
 		console.log(values);
 	};
 
@@ -139,6 +146,7 @@ const CreateReport = () => {
 				}}
 			>
 				{({
+					values,
 					values: { purpose, isReceiptMissing, selectedFile },
 					errors = {},
 					isSubmitting,
@@ -233,7 +241,7 @@ const CreateReport = () => {
 								>
 									Cancel
 								</Button>
-								{getConfirmationCTA({ isSubmitting, isValid })}
+								{getConfirmationCTA({ isSubmitting, isValid, values })}
 							</div>
 						)}
 					</Form>
