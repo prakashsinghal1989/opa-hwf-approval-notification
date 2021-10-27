@@ -3,7 +3,13 @@
  */
 import { string, node } from 'prop-types';
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
 
+// Context
+import { AppContext } from '../../contexts/AppContext';
+
+// Components
+import Loader from '../Loader';
 // Logo Assets
 import LogoImage from '../../assets/images/logo.png';
 
@@ -11,6 +17,7 @@ import LogoImage from '../../assets/images/logo.png';
 import './styles.scss';
 
 const PageLayout = ({ additonalClasses, children }) => {
+	const [loaderVisible] = useContext(AppContext);
 	return (
 		<div className={`opa-page-layout ${additonalClasses}`}>
 			<header className="opa-page-layout__header d-flex align-items-center">
@@ -29,6 +36,7 @@ const PageLayout = ({ additonalClasses, children }) => {
 				</Link>
 			</header>
 			<main className="opa-page-layout__content">{children}</main>
+			{loaderVisible && <Loader />}
 		</div>
 	);
 };

@@ -1,0 +1,13 @@
+@import '../../styles/main.scss';
+
+.opa-time-prediction__modal {
+	&-title,
+	&-description {
+		margin-bottom: $opa-spacing-3;
+	}
+	.opa-modal-component__content {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+}

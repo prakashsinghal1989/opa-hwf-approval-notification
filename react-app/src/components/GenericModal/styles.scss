@@ -1,0 +1,40 @@
+@import '../../styles/main.scss';
+
+.opa-modal-component {
+	color: $opa-color-black;
+	&__overlay {
+		position: fixed;
+		top: 0px;
+		left: 0px;
+		right: 0px;
+		bottom: 0px;
+		background-color: rgba($opa-color-black, 0.6);
+		z-index: 100;
+	}
+	padding: $opa-spacing-5;
+	top: 50%;
+	transform: translateY(-50%);
+	position: fixed;
+	background: $opa-color-white;
+	border-radius: $opa-spacing-5;
+	width: 90%;
+	@media only screen and (min-width: $opa-breakpoint-tablet) {
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+	}
+	&__btn-close {
+		position: absolute;
+		appearance: none;
+		border: none;
+		padding: 0;
+		margin: 0;
+		right: $opa-spacing-4;
+		top: $opa-spacing-4;
+		background: none;
+		@media only screen and (min-width: $opa-breakpoint-tablet) {
+			right: $opa-spacing-4;
+			top: $opa-spacing-2;
+		}
+	}
+}

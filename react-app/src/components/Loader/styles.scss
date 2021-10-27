@@ -1,0 +1,65 @@
+@import '../../styles/main.scss';
+
+.opa-loader {
+	&--wrapper {
+		position: fixed;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		text-align: center;
+		z-index: 100;
+		overflow: hidden;
+		background: rgba($opa-color-white, 0.5);
+	}
+	&--container {
+		background-color: transparent;
+		border: $opa-spacing-2 solid $opa-color-light-blue-40;
+		border-top: $opa-spacing-2 solid $opa-color-light-blue-80;
+		border-radius: 50%;
+		width: 70px;
+		height: 70px;
+		vertical-align: middle;
+		animation: spin 2s infinite linear;
+		position: fixed;
+		top: 50%;
+		left: 45%;
+		transform: translate(-50%, -50%);
+	}
+}
+
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+@keyframes ellipsis1 {
+	0% {
+		transform: scale(0);
+	}
+	100% {
+		transform: scale(1);
+	}
+}
+
+@keyframes ellipsis2 {
+	0% {
+		transform: translate(0, 0);
+	}
+	100% {
+		transform: translate(24px, 0);
+	}
+}
+
+@keyframes ellipsis3 {
+	0% {
+		transform: scale(1);
+	}
+	100% {
+		transform: scale(0);
+	}
+}
