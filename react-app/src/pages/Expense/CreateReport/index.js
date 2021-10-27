@@ -37,9 +37,9 @@ const CreateReport = () => {
 		try {
 			setLoaderVisible(true);
 			const { type, amount, isReceiptMissing, selectedFile } = values;
-			let hasAttachment = false;
+			let hasAttachment = 'FALSE';
 			if (selectedFile && !isReceiptMissing) {
-				hasAttachment = true;
+				hasAttachment = 'TRUE';
 			}
 			const payload = {
 				processName: 'Expense',
@@ -56,7 +56,7 @@ const CreateReport = () => {
 
 			const { responseData } = result;
 			if (responseData) {
-				const { predictionMessage } = responseData;
+				const predictionMessage = `Your Expense is predicted to be Approved within ${responseData} days!`;
 				setTimePredictionMessage(predictionMessage);
 				setTimePredictionModalStatus(true);
 			}
