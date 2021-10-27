@@ -6,6 +6,7 @@ import clsx from 'clsx';
 // Configs
 import expenseReportTypeConfig from '../../../config/expenseReportTypeConfig';
 import expenseCurrencyConfig from '../../../config/expenseCurrencyConfig';
+import urlConfig from '../../../config/urlConfig';
 
 // Network
 import NetworkUtils from '../../../network';
@@ -16,40 +17,45 @@ import validationSchema from './validationSchema';
 // Context
 import { AppContext } from '../../../contexts/AppContext';
 
+// Utils
+import { getAttachMentFlag, getSubmitExpensePayload } from '../../../utils/ExpenseUtils';
+
 // Components
 import TextInput from '../../../components/TextInput';
 import Button from '../../../components/Button';
 import Dropdown from '../../../components/Dropdown';
 import CheckBox from '../../../components/CheckBox';
 import TimePredictionModal from '../../../components/TimePredictionModal';
+import TextArea from '../../../components/TextArea';
 
 // Styles
 import './styles.scss';
+
+const { timePredictionUrl, expenseSubmitUrl } = urlConfig;
 
 const CreateReport = () => {
 	const [showOtherFields, setShowOtherFields] = useState(false);
 	const [timePredictionCompleted, setTimePredictionFlag] = useState(false);
 	const [timePredictionModalStatus, setTimePredictionModalStatus] = useState(false);
 	const [timePredictionMessage, setTimePredictionMessage] = useState('');
+	const [errorMessage, setErrorMessage] = useState('');
 	const [, setLoaderVisible] = useContext(AppContext);
 
 	const getTimePrediction = async (values) => {
 		try {
 			setLoaderVisible(true);
+			setErrorMessage('');
 			const { type, amount, isReceiptMissing, selectedFile } = values;
-			let hasAttachment = 'FALSE';
-			if (selectedFile && !isReceiptMissing) {
-				hasAttachment = 'TRUE';
-			}
+
 			const payload = {
 				processName: 'Expense',
 				category: type,
 				amount,
 				priority: Math.floor(Math.random() * (3 - 1 + 1) + 1),
-				hasAttachment,
+				hasAttachment: getAttachMentFlag({ isReceiptMissing, selectedFile }),
 			};
 			const result = await NetworkUtils.makeApiRequest({
-				url: 'recommendations/time',
+				url: timePredictionUrl,
 				method: 'post',
 				data: payload,
 			});
@@ -61,7 +67,7 @@ const CreateReport = () => {
 				setTimePredictionModalStatus(true);
 			}
 		} catch (e) {
-			console.log(e);
+			setErrorMessage(e.errorMessage);
 		} finally {
 			setLoaderVisible(false);
 		}
@@ -119,8 +125,27 @@ const CreateReport = () => {
 			</Button>
 		);
 	};
+
 	const submitReport = async (values) => {
-		console.log(values);
+		try {
+			setErrorMessage('');
+			const payload = getSubmitExpensePayload(values);
+			console.log('expense submit payload:', payload);
+			const result = await NetworkUtils.makeApiRequest({
+				url: expenseSubmitUrl,
+				method: 'post',
+				data: payload,
+			});
+
+			const { responseData } = result;
+			if (responseData) {
+				console.log(responseData);
+			}
+		} catch (e) {
+			setErrorMessage(e.errorMessage);
+		} finally {
+			setLoaderVisible(false);
+		}
 	};
 
 	return (
@@ -129,12 +154,13 @@ const CreateReport = () => {
 			<Formik
 				initialValues={{
 					purpose: '',
-					date: '',
+					recieptDate: '',
 					type: '',
 					amount: '',
 					currency: '',
 					selectedFile: null,
 					isReceiptMissing: false,
+					description: '',
 				}}
 				validationSchema={Yup.object(validationSchema)}
 				onSubmit={(values) => {
@@ -165,7 +191,7 @@ const CreateReport = () => {
 							<>
 								<TextInput
 									labelKey="Date *"
-									name="date"
+									name="recieptDate"
 									id="item-date"
 									ariaLabel="Expense Item Date"
 									type="date"
@@ -193,6 +219,7 @@ const CreateReport = () => {
 										type="tel"
 									/>
 								</div>
+								<TextArea name="description" labelKey="Description" id="description" />
 								<label className="opa-create-report__form__file-upload" htmlFor="file">
 									<input
 										type="file"
@@ -247,6 +274,7 @@ const CreateReport = () => {
 					</Form>
 				)}
 			</Formik>
+			{errorMessage && <p className="opa-error-text">{errorMessage}</p>}
 			{timePredictionModalStatus && (
 				<TimePredictionModal
 					handleModalClose={handleModalClose}

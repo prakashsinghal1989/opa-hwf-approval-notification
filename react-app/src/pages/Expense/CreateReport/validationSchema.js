@@ -2,7 +2,7 @@ import * as Yup from 'yup';
 
 export default {
 	purpose: Yup.string().trim().required('Please enter purpose of this expense report'),
-	date: Yup.string().trim().required('Please select expense date'),
+	recieptDate: Yup.string().trim().required('Please select expense date'),
 	type: Yup.string().trim().required('Please select expense type'),
 	currency: Yup.string().trim().required('Please select expense currency'),
 	amount: Yup.string()

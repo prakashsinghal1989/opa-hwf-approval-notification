@@ -9,6 +9,6 @@ export default [
 	},
 	{
 		name: 'EUR',
-		value: 'Travel',
+		value: 'EUR',
 	},
 ];
