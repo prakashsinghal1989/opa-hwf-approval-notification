@@ -8,9 +8,12 @@ const AppContext = createContext();
 
 const AppProvider = ({ children }) => {
 	const [loaderVisible, setLoaderVisible] = useState(false);
+	const [selectedUser, setSelectedUser] = useState('Atul');
 
 	return (
-		<AppContext.Provider value={[loaderVisible, setLoaderVisible]}>{children}</AppContext.Provider>
+		<AppContext.Provider value={[loaderVisible, setLoaderVisible, selectedUser, setSelectedUser]}>
+			{children}
+		</AppContext.Provider>
 	);
 };
 

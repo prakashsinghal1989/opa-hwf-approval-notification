@@ -16,7 +16,7 @@ export const getAttachMentFlag = ({ isReceiptMissing, selectedFile }) => {
  * @param {*} values
  * @returns payload -- {}
  */
-export const getSubmitExpensePayload = (values) => {
+export const getSubmitExpensePayload = ({ values, selectedUser }) => {
 	const {
 		amount,
 		purpose,
@@ -54,7 +54,7 @@ export const getSubmitExpensePayload = (values) => {
 				type: 'String',
 			},
 			creatorId: {
-				value: 'Sid',
+				value: selectedUser,
 				type: 'String',
 			},
 			// creatorEmail: {
