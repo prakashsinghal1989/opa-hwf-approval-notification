@@ -36,4 +36,12 @@
 	&--icon-left {
 		margin-right: $opa-spacing-2;
 	}
+	&.button-icon-only {
+		padding: 0;
+		min-width: 0;
+		border: none;
+		.opa-icon--right {
+			margin: 0;
+		}
+	}
 }

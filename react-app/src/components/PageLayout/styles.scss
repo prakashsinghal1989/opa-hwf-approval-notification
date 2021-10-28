@@ -8,4 +8,51 @@
 	&__content {
 		height: 100vh;
 	}
+	&__header-nav {
+		position: relative;
+		&--user-name {
+			font-size: $opa-font-size-18;
+		}
+		&--user-btn {
+			color: $opa-color-white;
+			border-radius: 50%;
+			min-width: 0;
+			height: 40px;
+			width: 40px;
+			&.medium {
+				padding: 8px;
+			}
+			&-icon {
+				color: $opa-color-white;
+				font-size: $opa-body-font-size-xlarge;
+				border: none;
+			}
+		}
+		&--user-dropdown {
+			position: absolute;
+			right: 0;
+			background-color: $opa-color-white;
+			width: 200px;
+			box-shadow: 6px $opa-spacing-2 $opa-spacing-2 6px rgba($opa-color-black, 0.1);
+			top: 50px;
+			border-radius: $opa-spacing-2;
+			ul {
+				list-style: none;
+				margin: 0;
+				padding: 0;
+				li {
+					border-bottom: 1px solid rgba($opa-color-black, 0.25);
+					&:last-child {
+						border-bottom: none;
+					}
+				}
+			}
+			&--list-item {
+				appearance: none;
+				background: none;
+				border: none;
+				padding: $opa-spacing-2;
+			}
+		}
+	}
 }

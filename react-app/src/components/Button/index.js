@@ -20,6 +20,7 @@ function Button({
 	disabled,
 	iconName,
 	iconPosition,
+	onlyIcon,
 	...props
 }) {
 	const getIcon = (icon) => {
@@ -53,16 +54,17 @@ function Button({
 		<button
 			type="button"
 			className={clsx(
-				additionalClasses,
+				'opa-button',
+				{
+					'button-icon-only': onlyIcon,
+				},
 				appearance,
 				size,
-				'opa-button',
+
 				{
 					disabled,
 				},
-				{
-					'button-icon-only': !children,
-				},
+				additionalClasses,
 			)}
 			disabled={disabled}
 			data-testid="button"
@@ -81,6 +83,7 @@ Button.propTypes = {
 	size: oneOf(['medium', 'large', 'small']),
 	iconPosition: oneOf(['left', 'right']),
 	iconName: string,
+	onlyIcon: bool,
 };
 
 Button.defaultProps = {
@@ -90,6 +93,7 @@ Button.defaultProps = {
 	size: 'medium',
 	iconPosition: 'left',
 	iconName: '',
+	onlyIcon: false,
 };
 
 export default Button;

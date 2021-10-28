@@ -4,16 +4,3 @@
 @import './_variables.scss';
 @import './_generic.scss';
 @import './_mixins.scss';
-
-html {
-	box-sizing: border-box;
-}
-
-body {
-	background-color: $opa-color-white;
-	color: $opa-color-white;
-}
-
-strong {
-	font-weight: $opa-font-weight-bold;
-}

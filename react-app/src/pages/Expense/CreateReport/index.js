@@ -42,7 +42,7 @@ const CreateReport = () => {
 	const [timePredictionModalStatus, setTimePredictionModalStatus] = useState(false);
 	const [timePredictionMessage, setTimePredictionMessage] = useState('');
 	const [errorMessage, setErrorMessage] = useState('');
-	const [, setLoaderVisible] = useContext(AppContext);
+	const [, setLoaderVisible, selectedUser] = useContext(AppContext);
 
 	/**
 	 * getTimePrediction makes an api call to time prediction api, in order to get the no
@@ -157,8 +157,7 @@ const CreateReport = () => {
 	const submitReport = async (values) => {
 		try {
 			setErrorMessage('');
-			const payload = getSubmitExpensePayload(values);
-			console.log('expense submit payload:', payload);
+			const payload = getSubmitExpensePayload({ values, selectedUser });
 			const result = await NetworkUtils.makeApiRequest({
 				url: expenseSubmitUrl,
 				method: 'post',
