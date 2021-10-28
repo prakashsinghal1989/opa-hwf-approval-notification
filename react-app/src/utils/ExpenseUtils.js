@@ -29,10 +29,10 @@ export const getSubmitExpensePayload = (values) => {
 	} = values;
 	const payload = {
 		variables: {
-			taskUrl: {
-				value: 'http://localhost:3000',
-				type: 'String',
-			},
+			// taskUrl: {
+			// 	value: 'http://localhost:3000',
+			// 	type: 'String',
+			// },
 			invoiceAmount: {
 				value: amount,
 				type: 'String',
@@ -57,18 +57,18 @@ export const getSubmitExpensePayload = (values) => {
 				value: 'Sid',
 				type: 'String',
 			},
-			creatorEmail: {
-				value: 'siddhant.wadhera@oracle.com',
-				type: 'String',
-			},
-			assigneeId: {
-				value: 'Vivek',
-				type: 'String',
-			},
-			assigneeEmail: {
-				value: 'vivek.ka.verma@oracle.com',
-				type: 'String',
-			},
+			// creatorEmail: {
+			// 	value: 'siddhant.wadhera@oracle.com',
+			// 	type: 'String',
+			// },
+			// assigneeId: {
+			// 	value: 'Vivek',
+			// 	type: 'String',
+			// },
+			// assigneeEmail: {
+			// 	value: 'vivek.ka.verma@oracle.com',
+			// 	type: 'String',
+			// },
 			subType: {
 				value: type,
 				type: 'String',
