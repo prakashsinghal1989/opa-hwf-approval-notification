@@ -171,4 +171,23 @@ public class NotificationPayload {
     public void setProcessDefinitionName(String processDefinitionName) {
         this.processDefinitionName = processDefinitionName;
     }
+    private String hasAttachment;
+
+    public String getHasAttachment() {
+        return hasAttachment;
+    }
+
+    public void setHasAttachment(String hasAttachment) {
+        this.hasAttachment = hasAttachment;
+    }
+
+    public String getIsValidReceipt() {
+        return isValidReceipt;
+    }
+
+    public void setIsValidReceipt(String isValidReceipt) {
+        this.isValidReceipt = isValidReceipt;
+    }
+
+    private String isValidReceipt;
 }

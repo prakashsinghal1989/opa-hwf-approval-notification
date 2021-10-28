@@ -21,3 +21,14 @@ reacta-app/node_modules
 react-app/npm-debug.log*
 react-app/yarn-debug.log*
 react-app/yarn-error.log*
+react-app/.idea/
+react-app/.eslintcache
+
+vivek/camunda_hwf_engine/target
+vivek/recomendation-service/target
+*/**/*.iml
+vivek/camunda_hwf_engine/.idea/*
+vivek/recomendation-service/.idea/*
+notification/target
+notification/.idea/*
+
