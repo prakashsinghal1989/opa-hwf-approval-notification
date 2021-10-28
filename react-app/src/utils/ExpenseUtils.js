@@ -33,6 +33,10 @@ export const getSubmitExpensePayload = ({ values, selectedUser }) => {
 			// 	value: 'http://localhost:3000',
 			// 	type: 'String',
 			// },
+			processName: {
+				value: 'Expense',
+				type: 'String',
+			},
 			invoiceAmount: {
 				value: amount,
 				type: 'String',

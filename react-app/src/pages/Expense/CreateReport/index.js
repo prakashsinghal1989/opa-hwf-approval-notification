@@ -2,6 +2,7 @@
  * Create Expense Report Page
  */
 import { useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import clsx from 'clsx';
@@ -28,7 +29,7 @@ import TextInput from '../../../components/TextInput';
 import Button from '../../../components/Button';
 import Dropdown from '../../../components/Dropdown';
 import CheckBox from '../../../components/CheckBox';
-import TimePredictionModal from '../../../components/TimePredictionModal';
+import ExpenseModal from '../../../components/ExpenseModal';
 import TextArea from '../../../components/TextArea';
 
 // Styles
@@ -41,8 +42,83 @@ const CreateReport = () => {
 	const [timePredictionCompleted, setTimePredictionFlag] = useState(false);
 	const [timePredictionModalStatus, setTimePredictionModalStatus] = useState(false);
 	const [timePredictionMessage, setTimePredictionMessage] = useState('');
+	const [submitModalStatus, setSubmitModalStatus] = useState(false);
+	const [submitSucessMessage, setSubmitSucessMessage] = useState('');
 	const [errorMessage, setErrorMessage] = useState('');
 	const [, setLoaderVisible, selectedUser] = useContext(AppContext);
+	const history = useHistory();
+
+	/**
+	 * Method to close the Modal
+	 */
+	const handleModalClose = () => {
+		setTimePredictionModalStatus(false);
+		setTimePredictionFlag(true);
+	};
+
+	/**
+	 * Method to close the Submit Expense Success Modal, reset the form and navigate back
+	 * to Expense Landing page
+	 * @param {*} resetFormFunc
+	 */
+	const handleSubmitModalClose = () => {
+		setSubmitModalStatus(false);
+		history.push({
+			pathname: `/expense-landing`,
+		});
+	};
+
+	/**
+	 * getSelectedFileDetails : shows the file details of the file chosen by a user to be
+	 * uploaded.
+	 * @param {*}
+	 * @returns Html Node
+	 */
+	const getSelectedFileDetails = ({ selectedFile, isReceiptMissing }) => {
+		if (selectedFile && !isReceiptMissing) {
+			const { name, type } = selectedFile;
+			return (
+				<div className="opa-create-report__form--file-details">
+					<p>
+						<strong>File Name:</strong> {name}
+					</p>
+					<p>
+						<strong>File Type:</strong> {type}
+					</p>
+				</div>
+			);
+		}
+		return null;
+	};
+
+	/**
+	 * submitReport: based on form submission and values constructs the payload and makes
+	 * an api call to start the expense process
+	 * @param {*} values
+	 */
+	const submitReport = async (values) => {
+		try {
+			setErrorMessage('');
+			const payload = getSubmitExpensePayload({ values, selectedUser });
+			const result = await NetworkUtils.makeApiRequest({
+				url: expenseSubmitUrl,
+				method: 'post',
+				data: payload,
+			});
+
+			const { responseData } = result;
+
+			if (responseData) {
+				const successMessage = `Your Expense is Submitted. For reference kindly note the generetd process uid ${responseData} `;
+				setSubmitSucessMessage(successMessage);
+				setSubmitModalStatus(true);
+			}
+		} catch (e) {
+			setErrorMessage(e.errorMessage);
+		} finally {
+			setLoaderVisible(false);
+		}
+	};
 
 	/**
 	 * getTimePrediction makes an api call to time prediction api, in order to get the no
@@ -83,37 +159,6 @@ const CreateReport = () => {
 	};
 
 	/**
-	 * Method to close the Modal
-	 */
-	const handleModalClose = () => {
-		setTimePredictionModalStatus(false);
-		setTimePredictionFlag(true);
-	};
-
-	/**
-	 * getSelectedFileDetails : shows the file details of the file chosen by a user to be
-	 * uploaded.
-	 * @param {*}
-	 * @returns Html Node
-	 */
-	const getSelectedFileDetails = ({ selectedFile, isReceiptMissing }) => {
-		if (selectedFile && !isReceiptMissing) {
-			const { name, type } = selectedFile;
-			return (
-				<div className="opa-create-report__form--file-details">
-					<p>
-						<strong>File Name:</strong> {name}
-					</p>
-					<p>
-						<strong>File Type:</strong> {type}
-					</p>
-				</div>
-			);
-		}
-		return null;
-	};
-
-	/**
 	 * getConfirmationCTA: based on wether the time prediction was completed or not , it
 	 * shows either the next or submit CTA
 	 * Next button will call the time prediction api and submit CTA will call the expense
@@ -147,32 +192,6 @@ const CreateReport = () => {
 				Next
 			</Button>
 		);
-	};
-
-	/**
-	 * submitReport: based on form submission and values constructs the payload and makes
-	 * an api call to start the expense process
-	 * @param {*} values
-	 */
-	const submitReport = async (values) => {
-		try {
-			setErrorMessage('');
-			const payload = getSubmitExpensePayload({ values, selectedUser });
-			const result = await NetworkUtils.makeApiRequest({
-				url: expenseSubmitUrl,
-				method: 'post',
-				data: payload,
-			});
-
-			const { responseData } = result;
-			if (responseData) {
-				console.log(responseData);
-			}
-		} catch (e) {
-			setErrorMessage(e.errorMessage);
-		} finally {
-			setLoaderVisible(false);
-		}
 	};
 
 	return (
@@ -303,10 +322,19 @@ const CreateReport = () => {
 			</Formik>
 			{errorMessage && <p className="opa-error-text">{errorMessage}</p>}
 			{timePredictionModalStatus && (
-				<TimePredictionModal
+				<ExpenseModal
 					handleModalClose={handleModalClose}
-					timePredictionModalStatus={timePredictionModalStatus}
-					timePredictionMessage={timePredictionMessage}
+					modalStatus={timePredictionModalStatus}
+					userMessage={timePredictionMessage}
+					modalTitle="Time Prediction"
+				/>
+			)}
+			{submitModalStatus && (
+				<ExpenseModal
+					handleModalClose={handleSubmitModalClose}
+					modalStatus={submitModalStatus}
+					userMessage={submitSucessMessage}
+					modalTitle="Expense Submitted Succesfully!"
 				/>
 			)}
 		</div>
