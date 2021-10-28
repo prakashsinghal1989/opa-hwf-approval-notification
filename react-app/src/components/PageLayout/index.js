@@ -1,5 +1,5 @@
 /**
- * Page Layout Component which renders the entire page  with header,left navigation menu and the main Content
+ * Page Layout Component which renders the entire page
  */
 import { string, node } from 'prop-types';
 import { Link } from 'react-router-dom';

@@ -1,3 +1,6 @@
+/**
+ * Label Component
+ */
 import clsx from 'clsx';
 import { node, string, oneOf } from 'prop-types';
 import './styles.scss';

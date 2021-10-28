@@ -1,3 +1,6 @@
+/**
+ * Home Page
+ */
 // Components
 import GridCell from '../../components/GridCell';
 

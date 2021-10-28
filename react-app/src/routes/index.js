@@ -1,3 +1,6 @@
+/**
+ * Routing file, this will hold all the routes that are available.
+ */
 import { Suspense, lazy } from 'react';
 import { Switch, Route } from 'react-router-dom';
 

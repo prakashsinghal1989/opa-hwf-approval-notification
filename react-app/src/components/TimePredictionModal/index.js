@@ -1,3 +1,6 @@
+/**
+ * Time Prediction Modal Component
+ */
 import { bool, func, string } from 'prop-types';
 
 // Components

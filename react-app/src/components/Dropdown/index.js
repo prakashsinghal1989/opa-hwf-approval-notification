@@ -1,3 +1,6 @@
+/**
+ * Dropdown Component
+ */
 import { string, bool, arrayOf, shape } from 'prop-types';
 import clsx from 'clsx';
 import { useField, Field } from 'formik';

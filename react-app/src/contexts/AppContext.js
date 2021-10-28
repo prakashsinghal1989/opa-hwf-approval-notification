@@ -1,3 +1,6 @@
+/**
+ * Overall App Context
+ */
 import { useState, createContext } from 'react';
 import { node } from 'prop-types';
 

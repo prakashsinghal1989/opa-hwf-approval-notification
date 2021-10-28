@@ -1,3 +1,6 @@
+/**
+ * Button Component
+ */
 import { node, string, bool, oneOf } from 'prop-types';
 import clsx from 'clsx';
 

@@ -1,3 +1,6 @@
+/**
+ * Create Expense Report Page
+ */
 import { useState, useContext } from 'react';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
@@ -41,6 +44,12 @@ const CreateReport = () => {
 	const [errorMessage, setErrorMessage] = useState('');
 	const [, setLoaderVisible] = useContext(AppContext);
 
+	/**
+	 * getTimePrediction makes an api call to time prediction api, in order to get the no
+	 * of days in which the expense being raised will be Approved. on Sucess of api call ,
+	 * it shows the time prediction Modal
+	 * @param {*} values
+	 */
 	const getTimePrediction = async (values) => {
 		try {
 			setLoaderVisible(true);
@@ -81,6 +90,12 @@ const CreateReport = () => {
 		setTimePredictionFlag(true);
 	};
 
+	/**
+	 * getSelectedFileDetails : shows the file details of the file chosen by a user to be
+	 * uploaded.
+	 * @param {*}
+	 * @returns Html Node
+	 */
 	const getSelectedFileDetails = ({ selectedFile, isReceiptMissing }) => {
 		if (selectedFile && !isReceiptMissing) {
 			const { name, type } = selectedFile;
@@ -98,6 +113,14 @@ const CreateReport = () => {
 		return null;
 	};
 
+	/**
+	 * getConfirmationCTA: based on wether the time prediction was completed or not , it
+	 * shows either the next or submit CTA
+	 * Next button will call the time prediction api and submit CTA will call the expense
+	 * start service
+	 * @param {*} param0
+	 * @returns
+	 */
 	const getConfirmationCTA = ({ isSubmitting, isValid, values }) => {
 		if (timePredictionCompleted) {
 			return (
@@ -126,6 +149,11 @@ const CreateReport = () => {
 		);
 	};
 
+	/**
+	 * submitReport: based on form submission and values constructs the payload and makes
+	 * an api call to start the expense process
+	 * @param {*} values
+	 */
 	const submitReport = async (values) => {
 		try {
 			setErrorMessage('');

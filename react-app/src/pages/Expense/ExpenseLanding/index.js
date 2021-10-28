@@ -1,3 +1,6 @@
+/**
+ * Expense Landing Page
+ */
 // Components
 import GridCell from '../../../components/GridCell';
 // Styles

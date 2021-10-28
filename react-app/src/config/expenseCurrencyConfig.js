@@ -1,3 +1,6 @@
+/**
+ * Currency Config
+ */
 export default [
 	{
 		name: 'USD',

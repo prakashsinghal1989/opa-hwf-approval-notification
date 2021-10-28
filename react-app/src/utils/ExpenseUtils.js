@@ -1,3 +1,8 @@
+/**
+ * getAttachMentFlag: determines the hasAttachment flag based on the attributes passed.
+ * @param {*}
+ * @returns hasAttachment -- boolean
+ */
 export const getAttachMentFlag = ({ isReceiptMissing, selectedFile }) => {
 	let hasAttachment = false;
 	if (selectedFile && !isReceiptMissing) {
@@ -6,6 +11,11 @@ export const getAttachMentFlag = ({ isReceiptMissing, selectedFile }) => {
 	return hasAttachment;
 };
 
+/**
+ * getSubmitExpensePayload : constructs the expense payload and returns the same
+ * @param {*} values
+ * @returns payload -- {}
+ */
 export const getSubmitExpensePayload = (values) => {
 	const {
 		amount,

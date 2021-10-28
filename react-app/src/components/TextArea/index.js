@@ -1,3 +1,6 @@
+/**
+ * TextArea Component
+ */
 import clsx from 'clsx';
 import { string, bool, oneOf } from 'prop-types';
 import { useRef } from 'react';

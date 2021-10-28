@@ -1,3 +1,6 @@
+/**
+ * expense type config
+ */
 export default [
 	{
 		name: 'AirFare',

@@ -1,3 +1,6 @@
+/**
+ * CheckBox Component
+ */
 import clsx from 'clsx';
 import { string } from 'prop-types';
 import { useField, Field } from 'formik';
