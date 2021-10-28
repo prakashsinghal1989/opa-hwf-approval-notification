@@ -25,6 +25,9 @@ public class TaskAssignmentListener implements TaskListener {
     @Override
     public void notify(DelegateTask delegateTask) {
         Map<String, Object> processVariables = delegateTask.getVariables();
+        for(String key : processVariables.keySet()){
+            System.out.println(">>>>>>>>>>>key = " + key + ":: Value ="+((String)processVariables.get(key)));
+        }
         String taskId = delegateTask.getId();
         String taskUrl = "http://localhost:8080/engine-rest/task/" + taskId;
         processVariables.put("taskUrl", taskUrl);

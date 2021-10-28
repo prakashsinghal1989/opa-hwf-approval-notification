@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 import weka.classifiers.Classifier;
 import weka.classifiers.lazy.IBk;
+import weka.classifiers.trees.J48;
 import weka.classifiers.trees.RandomTree;
 import weka.core.Attribute;
 import weka.core.DenseInstance;
@@ -26,9 +27,9 @@ import weka.core.converters.ConverterUtils.DataSource;
 public class RecommendationUtils {
 
 
-    private static final String modelpath = "/Users/vivvverm/IdeaProjects/PrakashGit/opa-hwf-poc/vivek/recomendation-service/src/main/resources/expense_train_levelsonly_java2.model";
+    private static final String modelpath = "/Users/vivvverm/IdeaProjects/PrakashGit/opa-hwf-poc/vivek/recomendation-service/src/main/resources/sid/outcome_prediction_new_java2.model";
     private static final String timeModelpath = "/Users/vivvverm/IdeaProjects/PrakashGit/opa-hwf-poc/vivek/recomendation-service/src/main/resources/sid/expected_wait_time_java2.model";
-    private static final String trainingArff = "/Users/vivvverm/IdeaProjects/PrakashGit/opa-hwf-poc/vivek/recomendation-service/src/main/resources/expense_train_levelsonly.arff";
+    private static final String trainingArff = "/Users/vivvverm/IdeaProjects/PrakashGit/opa-hwf-poc/vivek/recomendation-service/src/main/resources/sid/outcome_prediction_new.arff";
     private static final String timeTrainingArff = "/Users/vivvverm/IdeaProjects/PrakashGit/opa-hwf-poc/vivek/recomendation-service/src/main/resources/sid/expected_wait_time.arff";
     @Autowired
     private RestTemplate restTemplate;
@@ -79,7 +80,7 @@ public class RecommendationUtils {
                 System.out.println("classValue " + i + " is " + classValue);
             }
 
-            RandomTree rm = new RandomTree();
+            J48 rm = new J48();
             rm.buildClassifier(trainDataset);
 
             SerializationHelper.write(modelpath, rm);
@@ -107,14 +108,18 @@ public class RecommendationUtils {
     public static void main(String[] args) {
         //Expense,CarRental,11061,FALSE,2,4
         //Expense,Airfare,269360,FALSE,1,9
-       TimePayload payload = new TimePayload();
+       //TimePayload payload = new TimePayload();
+       NotificationPayload payload = new NotificationPayload();
         payload.setProcessName("Expense");
-        payload.setCategory("Airfare");
-        payload.setAmount("269360");
-        payload.setPriority("3");
+        payload.setSubType("Airfare");
+        payload.setInvoiceAmount("5000");
+        payload.setIsValidReceipt("TRUE");
         payload.setHasAttachment("TRUE");
+        payload.setAssigneeLevel("3");
+        payload.setCreatorLevel("Manager");
         RecommendationUtils recommendationUtils = new RecommendationUtils();
-        recommendationUtils.predictTime(payload);
+        recommendationUtils.predictOutcome(payload);
+        //createOutcomeModel();
     }
 
     public String predictTime(TimePayload payload){
@@ -223,11 +228,16 @@ public class RecommendationUtils {
                 add("Manager");
             }
         };
-        final List<String> assigneeLevels = new ArrayList<String>() {
+        final List<String> validReceipts = new ArrayList<String>() {
             {
-                add("Manager");
-                add("SrManager");
-                add("CEO");
+                add("TRUE");
+                add("FALSE");
+            }
+        };
+        final List<String> hasAttachments = new ArrayList<String>() {
+            {
+                add("TRUE");
+                add("FALSE");
             }
         };
         final List<String> classes = new ArrayList<String>() {
@@ -240,8 +250,10 @@ public class RecommendationUtils {
         final Attribute processName = new Attribute("processName", processNames);
         final Attribute subtype = new Attribute("subtype", subTypes);
         final Attribute creatorLevel = new Attribute("creatorLevel", creatorLevels);
-        final Attribute assigneeLevel = new Attribute("assigneeLevel", assigneeLevels);
+        final Attribute assigneeLevel = new Attribute("jobLevel");
         final Attribute amount = new Attribute("amount");
+        final Attribute isValidReceipt = new Attribute("isValidReceipt", validReceipts);
+        final Attribute hasAttachment = new Attribute("hasAttachment", hasAttachments);
 
 
         ArrayList<Attribute> attributeList = new ArrayList<Attribute>() {
@@ -251,7 +263,9 @@ public class RecommendationUtils {
                 add(creatorLevel);
                 add(assigneeLevel);
                 add(amount);
-                Attribute classAttribute = new Attribute("class", classes);
+                add(isValidReceipt);
+                add(hasAttachment);
+                Attribute classAttribute = new Attribute("outcome", classes);
                 add(classAttribute);
             }
         };
@@ -263,8 +277,10 @@ public class RecommendationUtils {
                 setValue(processName, payload.getProcessName());
                 setValue(subtype, payload.getSubType());
                 setValue(creatorLevel, payload.getCreatorLevel());
-                setValue(assigneeLevel, payload.getAssigneeLevel());
+                setValue(assigneeLevel, Integer.valueOf(payload.getAssigneeLevel()));
                 setValue(amount, Integer.valueOf(payload.getInvoiceAmount()));
+                setValue(isValidReceipt, payload.getIsValidReceipt());
+                setValue(hasAttachment, payload.getHasAttachment());
             }
         };
 
@@ -274,9 +290,8 @@ public class RecommendationUtils {
         Classifier cls = null;
         InputStream is = null;
         try {
-            is = this.getClass().getResourceAsStream("/expense_train_levelsonly_java2.model");
-            System.out.println("RecommendationUtils.predictOutcome:: trying to read model is is::"+is);
-            cls = (RandomTree) SerializationHelper.read(is);
+            is = this.getClass().getResourceAsStream("/sid/outcome_prediction_new_java2.model");
+            cls = (J48) SerializationHelper.read(is);
             is.close();
         } catch (Exception e) {
             e.printStackTrace();

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="89697719-f81f-4d32-811a-7430eccc32ea" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../../react-app/.eslintcache" beforeDir="false" afterPath="$PROJECT_DIR$/../../react-app/.eslintcache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../react-app/src/pages/Expense/CreateReport/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../react-app/src/pages/Expense/CreateReport/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../react-app/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../../react-app/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/opa/camunda/poc/listeners/TaskAssignmentListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/opa/camunda/poc/listeners/TaskAssignmentListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../recomendation-service/src/main/java/com/opa/poc/recomendations/model/NotificationPayload.java" beforeDir="false" afterPath="$PROJECT_DIR$/../recomendation-service/src/main/java/com/opa/poc/recomendations/model/NotificationPayload.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../recomendation-service/src/main/java/com/opa/poc/recomendations/util/RecommendationUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/../recomendation-service/src/main/java/com/opa/poc/recomendations/util/RecommendationUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../recomendation-service/target/classes/sid/expected_wait_time_test.arff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../recomendation-service/target/docker/image-id" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../recomendation-service/target/docker/image-name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../recomendation-service/target/docker/repository" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../recomendation-service/target/docker/tag" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../recomendation-service/target/maven-archiver/pom.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../recomendation-service/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../recomendation-service/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../recomendation-service/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../recomendation-service/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../recomendation-service/target/recommendation-srvc-2.0.0.jar.original" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../recomendation-service/target/test-classes/META-INF/docker/com.opa.poc.recomendations/recommendation-srvc/image-id" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../recomendation-service/target/test-classes/META-INF/docker/com.opa.poc.recomendations/recommendation-srvc/image-name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../recomendation-service/target/test-classes/META-INF/docker/com.opa.poc.recomendations/recommendation-srvc/repository" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../recomendation-service/target/test-classes/META-INF/docker/com.opa.poc.recomendations/recommendation-srvc/tag" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="ProjectId" id="1yb54juQoLsjDRh7yxUF7h99bKK" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="show.run.dashboard.notification" value="false" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.opa.camunda.poc.model" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/src/main/resources" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Spring Boot.Application (1)">
+    <configuration default="true" type="JetRunConfigurationType">
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Application (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="camunda-hwf-engine" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.opa.camunda.poc.Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Application (2)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="camunda-hwf-engine (1)" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.opa.camunda.poc.Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="camunda_hwf_engine" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.opa.camunda.poc.Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="89697719-f81f-4d32-811a-7430eccc32ea" name="Changes" comment="" />
+      <created>1632507260819</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1632507260819</updated>
+      <workItem from="1632507263140" duration="9888000" />
+      <workItem from="1632518723771" duration="3655000" />
+      <workItem from="1632524434248" duration="2396000" />
+      <workItem from="1632725306187" duration="2734000" />
+      <workItem from="1632808760218" duration="997000" />
+      <workItem from="1632932943860" duration="14604000" />
+      <workItem from="1633023265737" duration="603000" />
+      <workItem from="1633329961518" duration="3298000" />
+      <workItem from="1635271021218" duration="4371000" />
+      <workItem from="1635339520813" duration="17000" />
+      <workItem from="1635352026077" duration="600000" />
+      <workItem from="1635352642894" duration="1409000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="SpringBootApplicationConfigurationType">
+        <watch expression="payload.processDefinitionName" />
+      </configuration>
+    </watches-manager>
+  </component>
+</project>
