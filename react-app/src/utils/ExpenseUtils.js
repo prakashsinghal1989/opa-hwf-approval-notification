@@ -4,9 +4,9 @@
  * @returns hasAttachment -- boolean
  */
 export const getAttachMentFlag = ({ isReceiptMissing, selectedFile }) => {
-	let hasAttachment = false;
+	let hasAttachment = 'FALSE';
 	if (selectedFile && !isReceiptMissing) {
-		hasAttachment = true;
+		hasAttachment = 'TRUE';
 	}
 	return hasAttachment;
 };
