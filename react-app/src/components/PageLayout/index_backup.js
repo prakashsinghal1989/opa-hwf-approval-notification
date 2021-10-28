@@ -2,14 +2,15 @@
  * Page Layout Component which renders the entire page
  */
 import { string, node } from 'prop-types';
-import { Link, useHistory } from 'react-router-dom';
+//  import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useContext, useState } from 'react';
 
 // Context
 import { AppContext } from '../../contexts/AppContext';
 
 // Config
-import userNameConfig from '../../config/userNameConfig';
+//  import userNameConfig from '../../config/userNameConfig';
 // Components
 import Loader from '../Loader';
 import Button from '../Button';
@@ -21,9 +22,10 @@ import LogoImage from '../../assets/images/logo.png';
 import './styles.scss';
 
 const PageLayout = ({ additonalClasses, children }) => {
-	const [loaderVisible, , selectedUser, setSelectedUser] = useContext(AppContext);
+	const [loaderVisible, , selectedUser] = useContext(AppContext);
+	//  const [loaderVisible, , selectedUser, setSelectedUser] = useContext(AppContext);
 	const [showUserDropDown, setUserDropDownStatus] = useState(false);
-	const history = useHistory();
+	//  const history = useHistory();
 	/**
 	 * Method to toggle the user DropDown
 	 */
@@ -31,17 +33,17 @@ const PageLayout = ({ additonalClasses, children }) => {
 		setUserDropDownStatus(!showUserDropDown);
 	};
 
-	/**
-	 * Method to set the selected User
-	 * @param {*} name
-	 */
-	const handleUserOptionClick = (name) => {
-		setSelectedUser(name);
-		handleUserDropdownToggle();
-		history.push({
-			pathname: `/expense-landing`,
-		});
-	};
+	// /**
+	//  * Method to set the selected User
+	//  * @param {*} name
+	//  */
+	// const handleUserOptionClick = (name) => {
+	// 	setSelectedUser(name);
+	// 	handleUserDropdownToggle();
+	// 	history.push({
+	// 		pathname: `/expense-landing`,
+	// 	});
+	// };
 
 	/**
 	 * Method to get the first Letter of the selected User.
@@ -77,7 +79,7 @@ const PageLayout = ({ additonalClasses, children }) => {
 						>
 							<span>{getUserInitial()}</span>
 						</Button>
-						<Button type="button" onClick={handleUserDropdownToggle} onlyIcon>
+						{/* <Button type="button" onClick={handleUserDropdownToggle} onlyIcon>
 							<i className="fas fa-angle-down opa-page-layout__header-nav--user-btn-icon" />
 						</Button>
 						{showUserDropDown && (
@@ -99,7 +101,7 @@ const PageLayout = ({ additonalClasses, children }) => {
 									))}
 								</ul>
 							</div>
-						)}
+						)} */}
 					</nav>
 				)}
 			</header>
