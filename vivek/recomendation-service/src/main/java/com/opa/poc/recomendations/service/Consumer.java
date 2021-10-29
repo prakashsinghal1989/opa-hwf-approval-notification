@@ -26,16 +26,22 @@ public class Consumer {
         try {
             notificationPayload = mapper.readValue(payload, NotificationPayload.class);
             AdditionalInvoiceDetails details = new AdditionalInvoiceDetails();
-
             String outcome = recommendationUtils.predictOutcome(notificationPayload);
-            String outcomeText = outcome.equals("APPROVE")?"Approving":"Rejecting";
-            details.setUserMessage("Auto "+outcomeText + " the task based on decision made by IntelligenceService");
-            notificationPayload.setOutcome(outcome);
-            notificationPayload.setAdditionalInvoiceDetails(details);
-            //Complete the Task based on the task URI also update the Variables
-
-            recommendationUtils.updateAndCompleteTask(notificationPayload.getTaskUrl(), notificationPayload.getProcessInstanceId(), outcome);
-            System.out.println("Consumer.consumeFromTopic:: Complete task completion");
+            boolean isAutoApproveEnabled = Boolean.valueOf(notificationPayload.getAssignee().getCanAutoApprove());
+            String outcomeText = outcome.equals("APPROVE")?"Approving":"Rejecting";;
+            if(!isAutoApproveEnabled){
+                outcomeText = String.format("Intelligence Service recommends %s the task.",outcomeText);
+                details.setUserMessage(outcomeText);
+                notificationPayload.setAdditionalInvoiceDetails(details);
+            }else
+            {
+                details.setUserMessage("Auto "+outcomeText + " the task based on decision made by IntelligenceService");
+                notificationPayload.setOutcome(outcome);
+                notificationPayload.setAdditionalInvoiceDetails(details);
+                //Complete the Task based on the task URI also update the Variables
+                recommendationUtils.updateAndCompleteTask(notificationPayload.getTaskUrl(), notificationPayload.getProcessInstanceId(), outcome);
+                System.out.println("Consumer.consumeFromTopic:: Complete task completion");
+            }
             payload = mapper.writeValueAsString(notificationPayload);
             System.out.println("Consumer.consumeFromTopic:: Sending to notification post adding recommendations");
         } catch (JsonProcessingException e) {

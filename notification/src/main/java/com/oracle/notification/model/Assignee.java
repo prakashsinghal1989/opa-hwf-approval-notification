@@ -3,7 +3,15 @@ public class Assignee {
 
     private String name;
     private String email;
+    private String canAutoApprove;
 
+    public String getCanAutoApprove() {
+        return canAutoApprove;
+    }
+
+    public void setCanAutoApprove(String canAutoApprove) {
+        this.canAutoApprove = canAutoApprove;
+    }
     public String getName() {
         return name;
     }

@@ -1,6 +1,7 @@
 package com.opa.camunda.poc.controller;
 
 import com.fasterxml.jackson.core.JsonParser;
+import com.opa.camunda.poc.util.HwfUtil;
 import org.apache.tomcat.util.json.JSONParser;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -11,6 +12,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.Map;
 
 @RestController
 @RequestMapping("/hwf")
@@ -40,5 +43,25 @@ public class HWFController {
             ex.printStackTrace();
             return "Completed";
         }
+    }
+
+    @GetMapping("/preference/{userName}")
+    public String getUserPreference(@PathVariable("userName") String username){
+        return HwfUtil.getUserPreference(username);
+    }
+
+    @PostMapping("/preference")
+    public void updateUserPreference(@RequestBody String payload){
+        System.out.println(">>>>>>>>>Trying to update UserPref ::"+payload);
+        JSONObject object = new JSONObject(payload);
+        String userName = object.getString("userName");
+        String enableAutoApprove = object.getString("enableAutoApprove");
+        System.out.println("userName:enableAutoApprove = " +userName +":"+ enableAutoApprove);
+        HwfUtil.setUserPreference(userName, enableAutoApprove);
+    }
+
+    @GetMapping("/preference/print")
+    public Map printPreference(){
+        return HwfUtil.printPreference();
     }
 }

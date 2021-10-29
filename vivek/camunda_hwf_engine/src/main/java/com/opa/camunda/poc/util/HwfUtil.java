@@ -19,7 +19,6 @@ public class HwfUtil {
 
     private static Map<String, String> userManagerMap = new HashMap<String, String>(){
         {
-            put("", "Manager");
             put("Vivek", "Ravi");
             put("Atul", "Rajiv");
             put("Sid", "Ravi");
@@ -32,12 +31,38 @@ public class HwfUtil {
         if(userLevelMap.containsKey(user))
             return userLevelMap.get(user);
         else
-            return "Employee";
+            return "1";
     }
     public static String getManager(String user){
         if(userManagerMap.containsKey(user))
             return userManagerMap.get(user);
         else
             return "Ravi";
+    }
+
+    private static Map<String, String> userPreferenceMap = new HashMap<String, String>(){
+        {
+            put("Vivek", "false");
+            put("Atul", "true");
+            put("Sid", "true");
+            put("Ravi", "true");
+            put("Rajiv", "false");
+            put("Lary", "true");
+        }
+    };
+
+    public static String getUserPreference(String username){
+        String pref = userPreferenceMap.get(username);
+        return  pref != null ? pref : "false" ;
+    }
+
+    public static void setUserPreference(String username, String pref){
+        userPreferenceMap.put(username, pref);
+    }
+
+    public static Map printPreference(){
+        for(String key : userPreferenceMap.keySet())
+            System.out.println("user:preference = " + key+":"+userPreferenceMap.get(key));
+        return userPreferenceMap;
     }
 }

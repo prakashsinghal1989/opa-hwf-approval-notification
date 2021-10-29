@@ -50,8 +50,13 @@ public class NotificationService {
             content.addBodyPart(html);
             msg.setContent(content,"text/html");
             helper.setTo(notificationPayload.getAssignee().getEmail());
-            String prefix = notificationPayload.getOutcome().equals("APPROVE")?"APPROVED":"REJECTED";
-            helper.setSubject(prefix+":Auto Completion Notification for Task: "+notificationPayload.getInvoiceTitle());
+            boolean isAutoApproveEnabled = Boolean.valueOf(notificationPayload.getAssignee().getCanAutoApprove());
+            if(isAutoApproveEnabled) {
+                String prefix = notificationPayload.getOutcome().equals("APPROVE") ? "APPROVED" : "REJECTED";
+                helper.setSubject(prefix + ":Auto Completion Notification for Task: " + notificationPayload.getInvoiceTitle());
+            }else
+                helper.setSubject(String.format("Action Required: Approval of %s %s from %s", notificationPayload.getProcessName(),
+                        notificationPayload.getInvoiceTitle(), notificationPayload.getInvoiceCreator().getName()));
             helper.setText(templateString,true);
             javaMailSender.send(msg);
 

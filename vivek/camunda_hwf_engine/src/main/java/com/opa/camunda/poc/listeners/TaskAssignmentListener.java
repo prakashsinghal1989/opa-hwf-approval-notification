@@ -48,8 +48,9 @@ public class TaskAssignmentListener implements TaskListener {
         creator.setName((String) processVariables.get("creatorId"));
         creator.setEmail("vivek.ka.verma@oracle.com");
         User assignee = new User();
-        assignee.setName(HwfUtil.getManager(creator.getName()));
+        assignee.setName(delegateTask.getAssignee());
         assignee.setEmail("vivek.ka.verma@oracle.com");
+        assignee.setCanAutoApprove(HwfUtil.getUserPreference(assignee.getName()));
         payload.setAssignee(assignee);
         payload.setInvoiceCreator(creator);
         processVariables.put("assigneeId", assignee.getName());
