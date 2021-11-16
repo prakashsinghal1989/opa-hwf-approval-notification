@@ -1,0 +1,29 @@
+<form role="form" name="form">
+<div class="form-group">
+    <label for="Invoice Title">Invoice Title</label>
+    <input class="form-control"
+           cam-variable-type="String"
+           cam-variable-name="invoiceTitle" />
+    <label for="Process Name">Process Name</label>
+    <input class="form-control"
+           cam-variable-type="String"
+           cam-variable-name="processDefinitionName" />
+    <label for="Invoice Date">Invoice Date</label>
+    <input class="form-control"
+           cam-variable-type="String"
+           cam-variable-name="invoiceDate"/>
+    <label for="Invoice Amount">Invoice Amount</label>
+    <input class="form-control"
+           cam-variable-type="String"
+           cam-variable-name="invoiceAmount" cam-variable-value="${invoiceAmount}" />
+
+    <label for="Currency">Currency</label>
+    <input class="form-control"
+           cam-variable-type="String"
+           cam-variable-name="currency" />
+    <label for="Invoice Description">Invoice Description</label>
+    <input class="form-control"
+           cam-variable-type="String"
+           cam-variable-name="invoiceDescription" />
+</div>
+</form>

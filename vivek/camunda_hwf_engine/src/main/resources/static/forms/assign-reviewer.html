@@ -1,0 +1,48 @@
+<html>
+<head>
+  <script src="/js/settings.js"></script>
+  <script src="/js/web-sdk.js" onload="initSDK('Bot')"></script>
+</head>
+<body>
+<form class="form-horizontal"
+      role="form">
+   <div class="control-group">
+     <label class="control-label">Amount</label>
+     <div class="controls">
+       <input cam-variable-name="amount"
+              cam-variable-type="String"
+              name="amount"
+              class="form-control" />
+     </div>
+   </div>
+   <div class="control-group">
+     <label class="control-label">Invoice Number</label>
+     <div class="controls">
+       <input cam-variable-name="invoiceNumber"
+              cam-variable-type="String"
+              name="invoiceNumber"
+              class="form-control" />
+     </div>
+   </div>
+   <div class="control-group">
+     <label class="control-label">Reviewer: </label>
+     <div class="controls">
+       <select cam-variable-name="reviewer"
+               cam-variable-type="String"
+               type="String"
+               name="reviewer"
+               class="form-control"
+               >
+         <option></option>
+         <option value="demo">Demo</option>
+         <option value="Ravi">Ravi</option>
+         <option value="Lalita">Lalita</option>
+         <option value="Rajiv">Rajiv</option>
+         <option value="Vivek">Vivek</option>
+       </select>
+
+     </div>
+   </div>
+</form>
+</body>
+</html>
